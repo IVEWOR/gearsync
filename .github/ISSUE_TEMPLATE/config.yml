@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: GearSync TODO
+    url: https://github.com/YOUR_USER/gearsync/blob/main/TODO.md
+    about: Master build plan

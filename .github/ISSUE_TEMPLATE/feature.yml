@@ -1,0 +1,33 @@
+name: Feature
+description: New functionality or capability
+title: "[Feature]: "
+labels: ["feature"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What
+      description: One-line description of the feature
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why
+      description: Why this matters, what it unblocks
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      value: |
+        - [ ] 
+        - [ ]
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Technical notes
+      description: APIs, libs, gotchas
