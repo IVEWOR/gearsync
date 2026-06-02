@@ -14,9 +14,13 @@
     "react-dom": "19.2.4"
   },
   "devDependencies": {
+    "@prisma/client": "^7.8.0",
+    "@shopify/app": "^3.58.2",
+    "@shopify/cli": "^4.1.0",
     "@tailwindcss/postcss": "^4",
     "eslint": "^9",
     "eslint-config-next": "16.2.7",
+    "prisma": "^7.8.0",
     "tailwindcss": "^4"
   }
 }

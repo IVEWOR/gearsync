@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
-REPO="ivewor/gearsync"
-PROJECT_NUM=1  # your project number
+REPO="IVEWOR/gearsync"
+PROJECT_NUM=5
 
 create() {
   local title="$1"

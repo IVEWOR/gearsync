@@ -1,0 +1,289 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Marketplace {
+  EBAY
+  AMAZON
+}
+
+enum Environment {
+  SANDBOX
+  PRODUCTION
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELLED
+  FROZEN
+  PENDING
+  DECLINED
+}
+
+// Shop
+model Shop {
+  id                     String                  @id @default(uuid())
+  domain                 String                  @unique
+  shopifyShopId          BigInt                  @unique
+  installedAt            DateTime                @default(now())
+  uninstalledAt          DateTime?
+  accessToken            String
+  scope                  String
+  updatedAt              DateTime                @updatedAt
+  email                  String?
+  country                String?
+  currency               String?
+  timezone               String?
+  planName               String?
+  marketplaceConnections MarketplaceConnection[]
+  subscriptions          Subscription[]
+  products               Product[]
+  fitments               Fitment[]
+  fitmentTemplates       FitmentTemplate[]
+  listings               MarketplaceListing[]
+  syncJobs               SyncJob[]
+  syncLogs               SyncLog[]
+  webhookEvents          WebhookEvent[]
+}
+
+model MarketplaceConnection {
+  id             String      @id @default(uuid())
+  shopId         String
+  shop           Shop        @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  marketplace    Marketplace
+  environment    Environment @default(SANDBOX)
+  accountId      String // eBay userId / Amazon sellerId
+  accessToken    String
+  refreshToken   String
+  expiresAt      DateTime
+  disconnectedAt DateTime?
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+
+  @@unique([shopId, marketplace])
+}
+
+model Subscription {
+  id              String             @id @default(uuid())
+  shopId          String
+  shop            Shop               @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  planName        String
+  shopifyChargeId BigInt             @unique
+  status          SubscriptionStatus @default(PENDING)
+  price           Decimal            @db.Decimal(10, 2)
+  currency        String             @default("USD")
+  trialEndsAt     DateTime?
+  activatedAt     DateTime?
+  cancelledAt     DateTime?
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+}
+
+model Product {
+  id                  String               @id @default(uuid())
+  shopId              String
+  shop                Shop                 @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  shopifyProductId    BigInt               @unique
+  title               String?
+  handle              String?
+  description         String?
+  status              String?
+  vendor              String?
+  productType         String?
+  tags                String[]
+  lastSyncedAt        DateTime?
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  variants            Variant[]
+  fitments            Fitment[]
+  marketplaceListings MarketplaceListing[]
+
+  @@index([shopId])
+}
+
+model Variant {
+  id               String   @id @default(uuid())
+  productId        String
+  product          Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  shopifyVariantId BigInt   @unique
+  title            String?
+  sku              String?
+  barcode          String?
+  price            Decimal  @db.Decimal(10, 2)
+  compareAtPrice   Decimal? @db.Decimal(10, 2)
+  inventory        Int?
+  inventoryItemId  BigInt?
+  position         Int?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([productId])
+}
+
+model Vehicle {
+  id       Int       @id @default(autoincrement())
+  year     Int
+  make     String
+  model    String
+  trim     String?
+  engine   String?
+  fitments Fitment[]
+
+  @@unique([year, make, model, trim, engine])
+  @@index([year, make, model])
+  @@index([make])
+}
+
+model Fitment {
+  id        String        @id @default(uuid())
+  shopId    String
+  shop      Shop          @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product       @relation(fields: [productId], references: [id], onDelete: Cascade)
+  vehicleId Int
+  vehicle   Vehicle       @relation(fields: [vehicleId], references: [id])
+  notes     String?
+  source    FitmentSource @default(MANUAL)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  @@unique([productId, vehicleId])
+  @@index([shopId])
+  @@index([productId])
+}
+
+enum FitmentSource {
+  MANUAL
+  CSV
+  TEMPLATE
+  AI
+}
+
+model FitmentTemplate {
+  id          String   @id @default(uuid())
+  shopId      String
+  shop        Shop     @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  name        String
+  description String?
+  vehicleIds  Int[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([shopId, name])
+  @@index([shopId])
+}
+
+model MarketplaceListing {
+  id                String        @id @default(uuid())
+  shopId            String
+  shop              Shop          @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  productId         String
+  product           Product       @relation(fields: [productId], references: [id], onDelete: Cascade)
+  marketplace       Marketplace
+  externalListingId String // eBay itemId / Amazon ASIN or SKU
+  status            ListingStatus @default(DRAFT)
+  url               String?
+  lastSyncedAt      DateTime?
+  lastError         String?
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  @@unique([productId, marketplace])
+  @@index([shopId])
+  @@index([marketplace, status])
+}
+
+enum ListingStatus {
+  DRAFT
+  ACTIVE
+  PAUSED
+  ENDED
+  ERROR
+}
+
+model SyncJob {
+  id           String       @id @default(uuid())
+  shopId       String
+  shop         Shop         @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  type         SyncJobType
+  marketplace  Marketplace?
+  resourceId   String? // productId, variantId, orderId etc.
+  status       JobStatus    @default(PENDING)
+  attempts     Int          @default(0)
+  maxAttempts  Int          @default(3)
+  scheduledFor DateTime     @default(now())
+  startedAt    DateTime?
+  completedAt  DateTime?
+  error        String?
+  payload      Json?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  @@index([shopId, status])
+  @@index([status, scheduledFor])
+}
+
+enum SyncJobType {
+  PRODUCT_SYNC
+  INVENTORY_SYNC
+  PRICE_SYNC
+  ORDER_IMPORT
+  LISTING_CREATE
+  LISTING_UPDATE
+  LISTING_END
+  FITMENT_SYNC
+}
+
+enum JobStatus {
+  PENDING
+  RUNNING
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+model SyncLog {
+  id           String       @id @default(uuid())
+  shopId       String
+  shop         Shop         @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  jobId        String?
+  marketplace  Marketplace?
+  resourceType String // "product", "inventory", "order"
+  resourceId   String?
+  action       String // "create", "update", "delete", "import"
+  status       LogStatus
+  message      String?
+  metadata     Json?
+  createdAt    DateTime     @default(now())
+
+  @@index([shopId, createdAt])
+  @@index([resourceId])
+}
+
+enum LogStatus {
+  SUCCESS
+  WARNING
+  ERROR
+}
+
+model WebhookEvent {
+  id          String    @id @default(uuid())
+  shopId      String?
+  shop        Shop?     @relation(fields: [shopId], references: [id], onDelete: SetNull)
+  source      String // "shopify", "ebay", "amazon"
+  topic       String // "products/update", "orders/create"
+  externalId  String?
+  payload     Json
+  processed   Boolean   @default(false)
+  processedAt DateTime?
+  error       String?
+  createdAt   DateTime  @default(now())
+
+  @@index([shopId, topic])
+  @@index([processed, createdAt])
+}
