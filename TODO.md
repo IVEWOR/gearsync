@@ -9,43 +9,43 @@ Legend:
 ## 0. External approvals (start day 1, run in background)
 
 - [~] Amazon SP-API developer registration
-  - [ ] Submit app application
+  - [x] Submit app application
   - [ ] IAM role + LWA credentials received
-- [ ] eBay Developer account
-  - [ ] Sandbox keyset
-  - [ ] Production keyset approved
-- [ ] Shopify Partner account
-  - [ ] Development store created
-  - [ ] App created in Partner dashboard
-  - [ ] API credentials saved
+- [~] eBay Developer account
+  - [x] Sandbox keyset
+  - [~] Production keyset approved
+- [x] Shopify Partner account
+  - [x] Development store created
+  - [x] App created in Partner dashboard
+  - [x] API credentials saved
 
 ## 1. Foundation
 
-- [ ] Repo scaffold (Next.js 15 App Router, JS, Tailwind)
-- [ ] Dependencies installed
+- [x] Repo scaffold (Next.js 15 App Router, JS, Tailwind)
+- [x] Dependencies installed
 - [ ] Folder structure committed
-- [ ] Supabase project created
-- [ ] Prisma initialized + connected
+- [x] Supabase project created
+- [x] Prisma initialized + connected
 - [ ] `.env` template committed (`.env.example`)
 - [ ] pg-boss boot + dummy job cycling
 
 ## 2. Data model
 
-- [ ] `schema.prisma` drafted
-  - [ ] Shop
-  - [ ] Subscription
-  - [ ] Product
-  - [ ] Vehicle
-  - [ ] Fitment
-  - [ ] FitmentTemplate
-  - [ ] MarketplaceConnection
-  - [ ] MarketplaceListing
-  - [ ] SyncJob
-  - [ ] SyncLog
-  - [ ] WebhookEvent
-- [ ] Migrations run
+- [x] `schema.prisma` drafted
+  - [x] Shop
+  - [x] Subscription
+  - [x] Product
+  - [x] Vehicle
+  - [x] Fitment
+  - [x] FitmentTemplate
+  - [x] MarketplaceConnection
+  - [x] MarketplaceListing
+  - [x] SyncJob
+  - [x] SyncLog
+  - [x] WebhookEvent
+- [x] Migrations run
 - [ ] Row-level security policies (Supabase)
-- [ ] Prisma client singleton (`lib/db.js`)
+- [x] Prisma client singleton (`lib/db.js`)
 
 ## 3. Shopify integration
 
