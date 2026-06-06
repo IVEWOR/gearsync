@@ -1,5 +1,6 @@
 import { shopify } from "@/lib/shopify/client";
 import { prisma } from "@/lib/db";
+import { registerWebhooks } from "@/lib/shopify/registerWebhooks";
 import { redirect } from "next/navigation";
 
 export async function GET(request) {
@@ -37,6 +38,8 @@ export async function GET(request) {
       planName: s.plan.displayName,
     },
   });
+
+  await registerWebhooks(client);
 
   return redirect(
     `https://${session.shop}/admin/apps/${process.env.SHOPIFY_API_KEY}`,

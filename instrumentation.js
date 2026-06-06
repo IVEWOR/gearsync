@@ -1,0 +1,10 @@
+export async function register() {
+  if (process.env.NEXT_RUNTIME === "nodejs") {
+    // Dynamic imports keep pg-boss and workers out of the Edge runtime bundle.
+    const { getBoss } = await import("./lib/queue/index.js");
+    const { registerWorkers } = await import("./lib/queue/workers.js");
+
+    const boss = await getBoss();
+    await registerWorkers(boss);
+  }
+}

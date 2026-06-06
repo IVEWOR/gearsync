@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node --experimental-strip-types -e \"const x: string = 'hello'; console.log\\(x\\);\")",
+      "Bash(node --experimental-strip-types --input-type=module)",
+      "Bash(node -e \"require\\('/home/ivewor/gearsync/generated/prisma/client.ts'\\)\")",
+      "Bash(node --experimental-strip-types -e ' *)",
+      "Bash(node -e \"const p = require\\('/home/ivewor/gearsync/node_modules/@shopify/polaris/build/cjs/index.js'\\); console.log\\(['ResourceList','IndexTable','Select','Autocomplete','Combobox'].filter\\(k => !!p[k]\\).join\\(', '\\)\\)\")",
+      "Bash(node -e ' *)",
+      "Bash(mkdir -p /home/ivewor/gearsync/app/products/_components \\\\ *)",
+      "Bash(node -e \"require\\('fs'\\); const d=require\\('/home/ivewor/gearsync/node_modules'\\); console.log\\('ok'\\)\")",
+      "Bash(node -e \"const p=require\\('/home/ivewor/gearsync/node_modules/@shopify/polaris/build/cjs/index.js'\\); console.log\\(['DropZone','List','DataTable','Thumbnail'].filter\\(k=>!!p[k]\\).join\\(', '\\)\\)\")",
+      "Bash(mkdir -p /home/ivewor/gearsync/app/fitment-templates/_components \\\\ *)",
+      "Bash(sed -i 's/TemplateIcon/ThemeTemplateIcon/g' \\\\ *)",
+      "Bash(node -e \"const p=require\\('/home/ivewor/gearsync/node_modules/@shopify/polaris/build/cjs/index.js'\\); console.log\\(['Collapsible','IndexTable','IndexFilters','InlineGrid'].filter\\(k=>!!p[k]\\).join\\(', '\\)\\)\")"
+    ],
+    "additionalDirectories": [
+      "/home/ivewor/gearsync/app/products/[id]",
+      "/home/ivewor/gearsync/app/fitment-templates/[id]",
+      "/home/ivewor/gearsync/app/products/[id]/_components"
+    ]
+  }
+}

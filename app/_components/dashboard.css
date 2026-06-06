@@ -1,0 +1,202 @@
+/* ─── GearSync Dashboard Custom Styles ─── */
+
+/* Hero */
+.gs-hero {
+  background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+  border-radius: 12px;
+  padding: 2.5rem 2rem;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.gs-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 85% 40%, rgba(59, 130, 246, 0.18) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.gs-wordmark {
+  font-size: 2rem;
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  position: relative;
+}
+.gs-wordmark strong {
+  font-weight: 800;
+  color: #60A5FA;
+}
+
+.gs-tagline {
+  font-size: 0.9375rem;
+  color: rgba(255, 255, 255, 0.65);
+  margin-top: 0.5rem;
+  letter-spacing: 0.01em;
+  font-weight: 400;
+  position: relative;
+}
+
+.gs-shop-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 100px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 1.25rem;
+  width: fit-content;
+  position: relative;
+}
+.gs-shop-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+  flex-shrink: 0;
+}
+
+/* ── Stats row ── */
+.gs-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.gs-stat {
+  background: #fff;
+  border: 1px solid #E5E7EB;
+  border-top: 3px solid #3B82F6;
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem 1.125rem;
+}
+.gs-stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+.gs-stat-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #6B7280;
+  margin-top: 0.375rem;
+}
+.gs-stat-sub {
+  font-size: 0.6875rem;
+  color: #9CA3AF;
+  margin-top: 0.25rem;
+}
+
+/* ── Marketplace cards ── */
+.gs-mkt-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.gs-mkt-card {
+  background: #fff;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.gs-mkt-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border-color: #D1D5DB;
+}
+.gs-mkt-bar {
+  height: 3px;
+  background: #E5E7EB;
+}
+.gs-mkt-bar.connected { background: #10B981; }
+
+.gs-mkt-body { padding: 1.5rem; }
+
+.gs-mkt-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-bottom: 1.25rem;
+}
+.gs-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.gs-status-dot.on  { background: #10B981; box-shadow: 0 0 0 2px rgba(16,185,129,0.2); }
+.gs-status-dot.off { background: #D1D5DB; }
+.gs-status-text.on  { color: #065F46; }
+.gs-status-text.off { color: #9CA3AF; }
+
+/* eBay wordmark */
+.gs-ebay {
+  font-size: 1.625rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 0.25rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+.gs-ebay-e { color: #E53238; }
+.gs-ebay-b { color: #0064D2; }
+.gs-ebay-a { color: #F5AF02; }
+.gs-ebay-y { color: #86B817; }
+.gs-mkt-sub {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #9CA3AF;
+  margin-bottom: 1rem;
+}
+
+/* Amazon wordmark */
+.gs-amazon {
+  font-size: 1.625rem;
+  font-weight: 800;
+  color: #111827;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 0.125rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+.gs-amazon-arrow {
+  display: inline-block;
+  width: 2rem;
+  height: 3px;
+  background: linear-gradient(90deg, #FF9900, #FF6600);
+  border-radius: 2px;
+  vertical-align: middle;
+  margin-left: 0.25rem;
+  position: relative;
+  top: -1px;
+}
+
+/* ── Divider section titles ── */
+.gs-section-title {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #9CA3AF;
+  margin-bottom: 0.75rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .gs-stats-grid  { grid-template-columns: 1fr; }
+  .gs-mkt-grid    { grid-template-columns: 1fr; }
+}
