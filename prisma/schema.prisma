@@ -49,6 +49,7 @@ model Shop {
   syncJobs               SyncJob[]
   syncLogs               SyncLog[]
   webhookEvents          WebhookEvent[]
+  categoryMappings       CategoryMapping[]
 }
 
 model MarketplaceConnection {
@@ -286,4 +287,19 @@ model WebhookEvent {
 
   @@index([shopId, topic])
   @@index([processed, createdAt])
+}
+
+model CategoryMapping {
+  id                   String      @id @default(uuid())
+  shopId               String
+  shop                 Shop        @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  marketplace          Marketplace
+  shopifyProductType   String
+  externalCategoryId   String
+  externalCategoryName String
+  createdAt            DateTime    @default(now())
+  updatedAt            DateTime    @updatedAt
+
+  @@unique([shopId, marketplace, shopifyProductType])
+  @@index([shopId, marketplace])
 }

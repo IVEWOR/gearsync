@@ -186,6 +186,7 @@ function FitmentEditorInner({ product, initialFitments }) {
         <a href="/products">Products</a>
         <a href="/fitment-templates">Fitment Templates</a>
         <a href="/settings">Settings</a>
+        <a href="/settings/ebay-categories">eBay Categories</a>
       </NavMenu>
       <Frame>
         <Page

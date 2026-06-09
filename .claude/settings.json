@@ -12,7 +12,10 @@
       "Bash(node -e \"const p=require\\('/home/ivewor/gearsync/node_modules/@shopify/polaris/build/cjs/index.js'\\); console.log\\(['DropZone','List','DataTable','Thumbnail'].filter\\(k=>!!p[k]\\).join\\(', '\\)\\)\")",
       "Bash(mkdir -p /home/ivewor/gearsync/app/fitment-templates/_components \\\\ *)",
       "Bash(sed -i 's/TemplateIcon/ThemeTemplateIcon/g' \\\\ *)",
-      "Bash(node -e \"const p=require\\('/home/ivewor/gearsync/node_modules/@shopify/polaris/build/cjs/index.js'\\); console.log\\(['Collapsible','IndexTable','IndexFilters','InlineGrid'].filter\\(k=>!!p[k]\\).join\\(', '\\)\\)\")"
+      "Bash(node -e \"const p=require\\('/home/ivewor/gearsync/node_modules/@shopify/polaris/build/cjs/index.js'\\); console.log\\(['Collapsible','IndexTable','IndexFilters','InlineGrid'].filter\\(k=>!!p[k]\\).join\\(', '\\)\\)\")",
+      "Bash(node -e \"const p=require\\('/home/ivewor/gearsync/node_modules/@shopify/polaris/build/cjs/index.js'\\); console.log\\(!!p.Autocomplete\\)\")",
+      "Bash(npx prisma *)",
+      "Bash(node -e \"const p=require\\('/home/ivewor/gearsync/node_modules/@shopify/polaris/build/cjs/index.js'\\); console.log\\(typeof p.Navigation.Section\\)\")"
     ],
     "additionalDirectories": [
       "/home/ivewor/gearsync/app/products/[id]",
