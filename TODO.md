@@ -23,11 +23,11 @@ Legend:
 
 - [x] Repo scaffold (Next.js 15 App Router, JS, Tailwind)
 - [x] Dependencies installed
-- [ ] Folder structure committed
+- [x] Folder structure committed
 - [x] Supabase project created
 - [x] Prisma initialized + connected
-- [ ] `.env` template committed (`.env.example`)
-- [ ] pg-boss boot + dummy job cycling
+- [x] `.env` template committed (`.env.example`)
+- [x] pg-boss boot + dummy job cycling
 
 ## 2. Data model
 
